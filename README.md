@@ -2,7 +2,6 @@
 
 > This is a simple php website developed for multipurpose objective
 
-------------
 
 ### Pre-Requisites:
 
@@ -31,11 +30,11 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 
 - Go to `ytronic -> yt-content` folder and create a file `webpage.phtml`
 
-- Open `ytronic -> yt-template -> functions.php` and go to line 131 and add this:
+- Open `ytronic -> yt-template -> functions.php` and go to `line 131` and add this:
 
 ```php
 'webpage' => array(
-	'menu_name'			=> 'Web Page',
+	'menu_name'		=> 'Web Page',
 	'page_title'		=> 'Web Page title',
 	'page_description'	=> 'Web Page description',
 ),
