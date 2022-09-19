@@ -1,0 +1,19 @@
+/**
+ * Template Name: Ytronic
+ * Template URI: https://github.com/elyonox/ytronic-php-website
+ * Author: ElYonox
+ * Author URI: https://github.com/elyonox
+ * Description: PHP Website designed for multipurpose objective.
+ * Version: 1.0.1
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
+body {
+	font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Quicksand', sans-serif;
+	color: #1C7697;
+}
