@@ -2,6 +2,7 @@
 
 > This is a simple php website developed for multipurpose objective
 
+![Ytronic Preview](https://github.com/elyonox/ytronic-php-website/blob/main/screenshot.png)
 
 ### Pre-Requisites:
 
