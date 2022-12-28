@@ -21,7 +21,7 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 ```
 *Local Disk C is the location where xampp was installed*
 
-3. The `yt_config.php` file contains the configuration of the website
+3. The `yt-config.php` file contains the configuration of the website
 
 4. Open XAMPP Control Panel and Start 'Apache'
 
