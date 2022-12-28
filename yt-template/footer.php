@@ -5,7 +5,6 @@
 if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
 } ?>
-
 <!-- Footer Start -->
 <div class="container-fluid text-light footer pt-5" style="margin-top: 6rem;">
 	<div class="container py-5">
@@ -90,7 +89,6 @@ if ( ! defined( 'YTABPATH' ) ) {
 	</div>
 </div>
 <!-- Footer End -->
-
-<?php load_scripts(); ?>
+<?php YTLoadScripts(); ?>
 </body>
 </html>

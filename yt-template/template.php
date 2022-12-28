@@ -6,13 +6,13 @@ if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-yt_load_pages();
+YTLoadPages();
 
-yt_header();
+YTLoadHeader();
 
-if ( function_exists( 'yt_page_content' ) )
+if ( function_exists( 'YTLoadPageContent' ) )
 {
-	yt_page_content();
+	YTLoadPageContent();
 } else {
 	$noContent = '<div class="container-fluid py-5 my-5">';
 	$noContent .= '<h1 class="h2 text-danger text-center pt-lg-5 mt-lg-5">NO Content...</h1>';
@@ -22,4 +22,4 @@ if ( function_exists( 'yt_page_content' ) )
 	echo $noContent;
 }
 	
-yt_footer();
+YTLoadFooter();
