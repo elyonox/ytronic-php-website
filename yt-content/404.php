@@ -3,7 +3,17 @@ if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function yt_page_content()
+function YTMetaRobots()
+{
+	echo YTIndexingSearchEngines('noindex','nofollow');
+}
+
+function YTPageTitle()
+{
+	echo '404 Page not found - Ytronic - Advanced and Faster PHP Website';
+}
+
+function YTLoadPageContent()
 {
 	ob_start(); // Page content to buffer
 ?>

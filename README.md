@@ -29,19 +29,16 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 
 ### Howto create Pages and Menus
 
-- Go to `ytronic -> yt-content` and create a file `webpage.php` inside
+- Go to `ytronic -> yt-content`, clone `faqs.php`, rename to `webpage.php` and edit the title, content, metas, etc... 
 
-- Open `ytronic -> yt-template -> functions.php` and go to `line 101` and add this:
+- Open `ytronic -> yt-template -> nav-menu.php` and go to `line 11` and add this:
 
 ```php
-'webpage' => array(
-	'menu_name'		=> 'Web Page',
-	'page_title'		=> 'Web Page title',
-	'page_description'	=> 'Web Page description',
+'webpage'	=> 'Webpage',
 ),
 ```
 
-- Refresh your browser and a new menu should be appear
+- Refresh your browser and a new menu item should be appear
 
 License
 -------

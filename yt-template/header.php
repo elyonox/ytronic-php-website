@@ -8,20 +8,29 @@ if ( ! defined( 'YTABPATH' ) ) {
 <!DOCTYPE html>
 <html lang="<?php echo yt_config('site_lang'); ?>">
 <head>
-	<meta charset="utf-8">
-	
-	<title><?php echo page_metas( query_str(), 'page_title' ); ?> | <?php site_name(); ?></title>
-	
+	<meta charset="utf-8"><?php if (function_exists('YTMetaRobots')){YTMetaRobots();} ?>
+	<title><?php if(function_exists('YTPageTitle')){YTPageTitle();}else{site_name();echo " - ";YTSiteDescript();} ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="icon" href="<?php echo IMGURI .'/favicon.png'; ?>">
 	<link rel="apple-touch-icon" href="<?php echo IMGURI .'/apple-touch-icon.png'; ?>">
 	
-	<meta name="description" content="<?php echo page_metas( query_str(), 'page_description' ); ?>">
-	<meta name="keywords" content="">
+	<link rel="canonical" href="<?php echo make_link(query_str() !== '/' ? rtrim(query_str(),"/") : query_str()); ?>">
+	<?php
+	// Load meta Description if function exists on the page
+	if (function_exists('YTPageDescription')){echo "\n\t";YTPageDescription();}
 	
-	<!-- Load CSS Styles -->
-<?php load_styles(); ?>
+	// Load meta Keywords if function exists on the page
+	if (function_exists('YTPageKeywords')){echo "\n\t";YTPageKeywords();echo "\n";}
+	
+	// Load CSS Styles
+	echo "\n"; YTLoadStyles();
+	
+	// Load meta OpenGraph if function exists on the page
+	if (function_exists('YTOpenGraph')){YTOpenGraph();}
+	
+	// Load meta SchemaOrg if function exists on the page
+	if (function_exists('YTSchemaOrg')){YTSchemaOrg();} ?>
 </head>
 <body>
 <div class="container-fluid position-relative p-0">
