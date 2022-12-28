@@ -29,9 +29,9 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 
 ### Howto create Pages and Menus
 
-- Go to `ytronic -> yt-content` folder and create a file `webpage.phtml`
+- Go to `ytronic -> yt-content` and create a file `webpage.php` inside
 
-- Open `ytronic -> yt-template -> functions.php` and go to `line 131` and add this:
+- Open `ytronic -> yt-template -> functions.php` and go to `line 117` and add this:
 
 ```php
 'webpage' => array(

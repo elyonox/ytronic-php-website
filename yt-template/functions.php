@@ -7,21 +7,6 @@ if ( ! defined( 'YTABPATH' ) ) {
 }
 
 /**
- * Site url. Add trailing slash if dont have.
- */
-function site_url()
-{
-	if ( yt_config('site_url') == '' )
-	{
-		$url_site = 'http://'. $_SERVER['HTTP_HOST'] .'/';
-	} else {
-		$url_last_char = mb_substr(yt_config('site_url'), -1);
-		$url_site = $url_last_char == '/' ? yt_config('site_url') : yt_config('site_url') .'/';
-	}
-	return $url_site;
-}
-
-/**
  * Server query string.
  */
 function query_str()
@@ -60,13 +45,14 @@ function site_name()
 }
 
 /**
- * Create GET link when pretty_url is inactive.
+ * Create link when pretty_url is active.
  */
 function make_link( $link )
 {
-	$link_no_host = yt_config('pretty_url') || $link == '/' ? $link : '?page=' . $link;
-	$link_real = $link_no_host == '/' ? site_url() : site_url() . $link_no_host;
-	return $link_real;
+	$requestLink = yt_config('pretty_url') || $link == '/' ? $link : '?page=' . $link;
+	$realLink = $requestLink == '/' ? site_url() : site_url() . $requestLink;
+	
+	return yt_config('pretty_url') && $link !== '/' ? $realLink .'/' : $realLink;
 }
 
 /**
@@ -75,10 +61,10 @@ function make_link( $link )
 function load_styles()
 {
 	$hscripts = array(
-		'<link rel="stylesheet" href="'.CSSURI.'/google-fonts.css">',
-		'<link rel="stylesheet" href="'.CSSURI.'/bootstrap.min.css">',
-		'<link rel="stylesheet" href="'.TMPLURI.'/style.css">',
-		'<link rel="stylesheet" href="'.CSSURI.'/custom.css">',
+		'<link rel="stylesheet" href="'. CSSURI .'/google-fonts.css">',
+		'<link rel="stylesheet" href="'. CSSURI .'/bootstrap.min.css">',
+		'<link rel="stylesheet" href="'. TMPLURI .'/style.css">',
+		'<link rel="stylesheet" href="'. CSSURI .'/custom.css">',
 	);
 	
 	foreach ( $hscripts as $hscript )
@@ -129,6 +115,7 @@ function page_metas( $page_uri = null, $meta_type )
 			'page_title'		=> 'Contact page title',
 			'page_description'	=> 'Contact page description',
 		),
+		
 	);
 	
 	$items_nav_menu = [];
@@ -146,12 +133,15 @@ function page_metas( $page_uri = null, $meta_type )
 	
 	if ( $page_uri )
 	{
-		if ( array_key_exists(query_str(), $site_pages) ) {
-			$return_metas = $site_pages[query_str()][$meta_type];
+		// query_str() without trailing end slash
+		$qstring = query_str() !== '/' ? rtrim(query_str(),"/") : query_str();
+		
+		if ( array_key_exists($qstring, $site_pages) ) {
+			$return_metas = $site_pages[$qstring][$meta_type];
 		} else {
-			$page_path = getcwd() . '/' . yt_config('content_dir') . '/' . query_str() .'.phtml';
+			$page_path = getcwd() . '/' . yt_config('content_dir') . '/' . $qstring .'.php';
 			if ( file_exists( $page_path ) ) {
-				$return_metas = ucfirst(str_replace('-', ' ', query_str()));
+				$return_metas = ucfirst(str_replace('-', ' ', $qstring));
 			} else {
 				$return_metas = '404 Error - Page not found';
 			}
@@ -185,11 +175,12 @@ function nav_menu()
 function page_content()
 {
 	$req_page = isset($_GET['page']) ? $_GET['page'] : 'home';
-    $page_path = getcwd() . '/' . yt_config('content_dir') . '/' . $req_page . '.phtml';
+	
+    $page_path = getcwd() . '/' . yt_config('content_dir') . '/' . rtrim($req_page,"/") . '.php';
 
     if ( ! file_exists( $page_path ) )
 	{
-        $page_path = getcwd() . '/' . yt_config('content_dir') . '/404.phtml';
+        $page_path = getcwd() . '/' . yt_config('content_dir') . '/404.php';
     }
 
     include_once $page_path;
@@ -203,7 +194,7 @@ function footer_info()
 	$link1 = 'https://github.com/elyonox/ytronic-php-website';
 	$link2 = 'https://github.com/elyonox';
 	$info1 = '<a href="'.$link1.'" target="_blank">Ytronic '. yt_config('version') .'</a>';
-	$info2 = 'Designed by <a href="'.$link2.'" target="_blank">ELYONOX</a>';
+	$info2 = 'Designed by <a href="'.$link2.'" target="_blank">YONOX</a>';
 	echo $info1.' - '.$info2;
 }
 

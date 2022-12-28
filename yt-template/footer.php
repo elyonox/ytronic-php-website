@@ -51,19 +51,19 @@ if ( ! defined( 'YTABPATH' ) ) {
 			</div>
 			<div class="col-md-6 col-lg-3">
 				<h2 class="text-white mb-4 fs-3">Quick Link</h2>
-				<a class="btn btn-link" href="/">About Us</a>
-				<a class="btn btn-link" href="/">Contact Us</a>
-				<a class="btn btn-link" href="/">Privacy Policy</a>
-				<a class="btn btn-link" href="/">Terms & Condition</a>
-				<a class="btn btn-link" href="/">Career</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">About Us</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Contact Us</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Privacy Policy</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Terms & Condition</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Career</a>
 			</div>
 			<div class="col-md-6 col-lg-3">
 				<h2 class="text-white mb-4 fs-3">Popular Link</h2>
-				<a class="btn btn-link" href="/">About Us</a>
-				<a class="btn btn-link" href="/">Contact Us</a>
-				<a class="btn btn-link" href="/">Privacy Policy</a>
-				<a class="btn btn-link" href="/">Terms & Condition</a>
-				<a class="btn btn-link" href="/">Career</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">About Us</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Contact Us</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Privacy Policy</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Terms & Condition</a>
+				<a class="btn btn-link" href="<?php echo make_link('/'); ?>">Career</a>
 			</div>
 			<div class="col-md-6 col-lg-3">
 				<h2 class="text-white mb-4 fs-3">Newsletter</h2>
