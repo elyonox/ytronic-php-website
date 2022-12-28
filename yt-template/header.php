@@ -5,20 +5,25 @@
 if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
 } ?>
+<!DOCTYPE html>
+<html lang="<?php echo yt_config('site_lang'); ?>">
 <head>
-	<title><?php echo page_metas( query_str(), 'page_title' ); ?> | <?php site_name(); ?></title>
 	<meta charset="utf-8">
+	
+	<title><?php echo page_metas( query_str(), 'page_title' ); ?> | <?php site_name(); ?></title>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="icon" href="<?php echo IMGURI .'/favicon.png'; ?>">
+	<link rel="apple-touch-icon" href="<?php echo IMGURI .'/apple-touch-icon.png'; ?>">
+	
 	<meta name="description" content="<?php echo page_metas( query_str(), 'page_description' ); ?>">
+	<meta name="keywords" content="">
 	
-	<!-- Favicon -->
-    <link href="<?php echo IMGURI; ?>/favicon.ico" rel="icon">
-	
-	<!-- Page CSS -->
+	<!-- Load CSS Styles -->
 <?php load_styles(); ?>
 </head>
 <body>
-<!-- Logo & Navbar Start-->
 <div class="container-fluid position-relative p-0">
 	<nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
 		<a href="<?php echo site_url(); ?>" class="navbar-brand p-0">
@@ -37,4 +42,3 @@ if ( ! defined( 'YTABPATH' ) ) {
 		</div>
 	</nav>
 </div>
-<!-- Logo & Navbar End -->

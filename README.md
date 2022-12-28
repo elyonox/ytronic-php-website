@@ -31,7 +31,7 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 
 - Go to `ytronic -> yt-content` and create a file `webpage.php` inside
 
-- Open `ytronic -> yt-template -> functions.php` and go to `line 117` and add this:
+- Open `ytronic -> yt-template -> functions.php` and go to `line 101` and add this:
 
 ```php
 'webpage' => array(

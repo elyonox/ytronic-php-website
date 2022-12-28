@@ -1,12 +1,16 @@
 <?php
 if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
-} ?>
+}
 
+function yt_page_content()
+{
+	ob_start(); // Page content to buffer
+?>
 <!-- Features Start -->
 <div class="container mt-lg-5 py-6 pb-4">
 	<div class="mx-auto text-center">
-		<div class="d-inline-block border rounded-pill text-primary px-4 mb-3"><?php echo yt_config('site_descript');?></div>
+		<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Ytronic HomePage</div>
 		<h1 class="mb-3">Ytronic Home Page Example</h1>
 		<p class="text-center mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae eleifend neque. Vestibulum ligula enim, dignissim eu facilisis fermentum, volutpat sit amet eros. Nam sed tristique odio. Duis fermentum ligula mattis facilisis volutpat. Phasellus eleifend convallis gravida. Duis non mauris vehicula erat congue consequat. Aenean at ornare ligula.</p>
 	</div>
@@ -17,7 +21,7 @@ if ( ! defined( 'YTABPATH' ) ) {
 				<h2 class="mb-4">Why People Choose Us? We Are Trusted & Award Wining Agency</h2>
 				<p>Clita nonumy sanctus nonumy et clita tempor, et sea amet ut et sadipscing rebum amet takimata amet, sed accusam eos eos dolores dolore et. Et ea ea dolor rebum invidunt clita eos. Sea accusam stet stet ipsum, sit ipsum et ipsum kasd</p>
 				<p>Et ea ea dolor rebum invidunt clita eos. Sea accusam stet stet ipsum, sit ipsum et ipsum kasd</p>
-				<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="/" aria-label="Read more">Read More</a>
+				<a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="<?php echo make_link('/'); ?>" aria-label="More info">Read More</a>
 			</div>
 			<div class="col-lg-7">
 				<div class="row g-5">
@@ -94,3 +98,10 @@ if ( ! defined( 'YTABPATH' ) ) {
 	</div>
 </div>
 <!-- Features End -->
+<?php // End page content buffer
+	$pageContent = ob_get_contents();
+	ob_end_clean();
+	
+	echo $pageContent;
+}
+?>

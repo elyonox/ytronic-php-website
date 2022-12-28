@@ -1,4 +1,5 @@
-function submitForm(event){
+function submitForm(event)
+{
 	event.preventDefault();
-	alert('Form blocked. First edit main.js from /yt-template/assets/js');
+	alert('Form blocked. Edit file: /yt-template/assets/js/main.js');
 }

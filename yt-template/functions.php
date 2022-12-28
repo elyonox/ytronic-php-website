@@ -21,22 +21,6 @@ function query_str()
 }
 
 /**
- * Stores the uri of the Ytronic assets.
- */
-if ( ! defined( 'TMPLURI' ) ) {
-	define ( 'TMPLURI', site_url() . yt_config( 'template_dir' ) );
-}
-if ( ! defined( 'CSSURI' ) ) {
-	define ( 'CSSURI', TMPLURI .'/assets/css' );
-}
-if ( ! defined( 'JSURI' ) ) {
-	define ( 'JSURI', TMPLURI .'/assets/js' );
-}
-if ( ! defined( 'IMGURI' ) ) {
-	define ( 'IMGURI', TMPLURI .'/assets/images' );
-}
-
-/**
  * Site name.
  */
 function site_name()
@@ -63,8 +47,7 @@ function load_styles()
 	$hscripts = array(
 		'<link rel="stylesheet" href="'. CSSURI .'/google-fonts.css">',
 		'<link rel="stylesheet" href="'. CSSURI .'/bootstrap.min.css">',
-		'<link rel="stylesheet" href="'. TMPLURI .'/style.css">',
-		'<link rel="stylesheet" href="'. CSSURI .'/custom.css">',
+		'<link rel="stylesheet" href="'. CSSURI .'/style.css">',
 	);
 	
 	foreach ( $hscripts as $hscript )
@@ -80,7 +63,7 @@ function load_scripts()
 {
 	$fscripts = array(
 		'<!-- Bootstrap JS -->',
-		'<script src="'.JSURI.'/bootstrap.bundle.min.js"></script>'."\n",
+		'<script src="'.JSURI.'/bootstrap.bundle.min.js"></script>',
 		'<!-- Main JS -->',
 		'<script src="'.JSURI.'/main.js"></script>',
 	);
@@ -172,7 +155,7 @@ function nav_menu()
 /**
  * Load page content.
  */
-function page_content()
+function yt_load_pages()
 {
 	$req_page = isset($_GET['page']) ? $_GET['page'] : 'home';
 	
@@ -195,6 +178,7 @@ function footer_info()
 	$link2 = 'https://github.com/elyonox';
 	$info1 = '<a href="'.$link1.'" target="_blank">Ytronic '. yt_config('version') .'</a>';
 	$info2 = 'Designed by <a href="'.$link2.'" target="_blank">YONOX</a>';
+	
 	echo $info1.' - '.$info2;
 }
 

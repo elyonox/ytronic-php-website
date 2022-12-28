@@ -1,8 +1,12 @@
 <?php
 if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
-} ?>
+}
 
+function yt_page_content()
+{
+	ob_start(); // Page content to buffer
+?>
 <!-- Contact Start -->
 <div class="container py-6 pb-4 mt-lg-5 text-center">
 	<div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Contact Us</div>
@@ -46,3 +50,10 @@ if ( ! defined( 'YTABPATH' ) ) {
 	</div>
 </div>
 <!-- Contact End -->
+<?php // End page content buffer
+	$pageContent = ob_get_contents();
+	ob_end_clean();
+	
+	echo $pageContent;
+}
+?>

@@ -15,7 +15,7 @@ function yt_config( $opt = '' )
 		'pretty_url'	=> false,							/** Convert url "/?page=contact" to "/contact" **/
 		'template_dir'	=> 'yt-template',					/** Template directory name **/
 		'content_dir'	=> 'yt-content',					/** Pages directory name **/
-		'version'		=> 'v1.1.0',						/** Ytronic app version **/
+		'version'		=> 'v2.1.0',						/** Ytronic app version **/
     );
 
     return isset($settings[$opt]) ? $settings[$opt] : null;
@@ -47,4 +47,20 @@ if ( ! defined( 'YTABPATH' ) ) {
 /** Set the path of the Ytronic template directory. */
 if ( ! defined( 'YTTMPL' ) ) {
 	define ( 'YTTMPL', __DIR__ . DIRECTORY_SEPARATOR . yt_config('template_dir') );
+}
+
+/**
+ * Stores the uri of the Ytronic assets.
+ */
+if ( ! defined( 'TMPLURI' ) ) {
+	define ( 'TMPLURI', site_url() . yt_config( 'template_dir' ) );
+}
+if ( ! defined( 'CSSURI' ) ) {
+	define ( 'CSSURI', TMPLURI .'/assets/css' );
+}
+if ( ! defined( 'JSURI' ) ) {
+	define ( 'JSURI', TMPLURI .'/assets/js' );
+}
+if ( ! defined( 'IMGURI' ) ) {
+	define ( 'IMGURI', TMPLURI .'/assets/images' );
 }

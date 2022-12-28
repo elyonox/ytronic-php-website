@@ -1,8 +1,12 @@
 <?php
 if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
-} ?>
+}
 
+function yt_page_content()
+{
+	ob_start(); // Page content to buffer
+?>
 <!-- Service Start -->
 <div class="container mt-lg-5 py-6 pb-4">
 	<div class="mx-auto text-center">
@@ -145,3 +149,10 @@ if ( ! defined( 'YTABPATH' ) ) {
 
 </div>
 <!-- Service End -->
+<?php // End page content buffer
+	$pageContent = ob_get_contents();
+	ob_end_clean();
+	
+	echo $pageContent;
+}
+?>
