@@ -35,7 +35,6 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 
 ```php
 'webpage'	=> 'Webpage',
-),
 ```
 
 - Refresh your browser and a new menu item should be appear
