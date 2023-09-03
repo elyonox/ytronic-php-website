@@ -3,7 +3,27 @@ if ( ! defined( 'YTABPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function yt_page_content()
+function YTMetaRobots()
+{
+	echo YTIndexingSearchEngines('index','nofollow');
+}
+
+function YTPageTitle()
+{
+	echo 'Services - Ytronic - Advanced and Faster PHP Website';
+}
+
+function YTPageDescription()
+{
+	echo '<meta name="description" content="Ytronic - The most Advanced and Faster PHP Website. NO mysql needed. Strongly SEO optimized.">';
+}
+
+function YTPageKeywords()
+{
+	echo '<meta name="keywords" content="ytronic, php website, seo, php bootstrap theme, php bootstrap template, bootstrap, bootstrap 5, faster php website, website themes, web design, php web development, free php website, php7, php8">';
+}
+
+function YTLoadPageContent()
 {
 	ob_start(); // Page content to buffer
 ?>

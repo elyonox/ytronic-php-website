@@ -29,6 +29,26 @@ function site_name()
 }
 
 /**
+ * Site description.
+ */
+function YTSiteDescript()
+{
+	echo yt_config( 'site_descript' );
+}
+
+/**
+ * Indexing pages to search engines or not.
+ */
+function YTIndexingSearchEngines( $index = 'index', $follow = 'follow')
+{
+	$meta_robots = "\n\t".'<meta name="robots" content="'.$index.', '.$follow.'">'."\n";
+	$block_robots = "\n\t".'<meta name="robots" content="noindex, nofollow">'."\n";
+	$allow_sengine = yt_config('allow_search_engine' ) ? $meta_robots : $block_robots;
+	
+	return $allow_sengine;
+}
+
+/**
  * Create link when pretty_url is active.
  */
 function make_link( $link )
@@ -42,7 +62,7 @@ function make_link( $link )
 /**
  * Load header styles.
  */
-function load_styles()
+function YTLoadStyles()
 {
 	$hscripts = array(
 		'<link rel="stylesheet" href="'. CSSURI .'/google-fonts.css">',
@@ -59,7 +79,7 @@ function load_styles()
 /**
  * Load footer scripts.
  */
-function load_scripts()
+function YTLoadScripts()
 {
 	$fscripts = array(
 		'<!-- Bootstrap JS -->',
@@ -75,77 +95,18 @@ function load_scripts()
 }
 
 /**
- * Retrieve pages meta data and nav_menu items.
- */
-function page_metas( $page_uri = null, $meta_type )
-{
-	$site_pages = array(
-		// home menu item with page title and meta description
-		'/' => array(
-			'menu_name'			=> 'Home',
-			'page_title'		=> 'Home page title',
-			'page_description'	=> 'Home page description',
-		),
-		// service menu item with page title and meta description
-		'services' => array(
-			'menu_name'			=> 'Services',
-			'page_title'		=> 'Services page title',
-			'page_description'	=> 'Services page description',
-		),
-		// contact menu item with page title and meta description
-		'contact' => array(
-			'menu_name'			=> 'Contact',
-			'page_title'		=> 'Contact page title',
-			'page_description'	=> 'Contact page description',
-		),
-		
-	);
-	
-	$items_nav_menu = [];
-	
-	foreach ( $site_pages as $pguri => $menu_names )
-	{
-		$items_nav_menu[$pguri] = $menu_names['menu_name'];
-	}
-	
-	if ( $meta_type == 'nav_menu' )
-	{
-		// return nav_menu array
-		return $items_nav_menu;
-	}
-	
-	if ( $page_uri )
-	{
-		// query_str() without trailing end slash
-		$qstring = query_str() !== '/' ? rtrim(query_str(),"/") : query_str();
-		
-		if ( array_key_exists($qstring, $site_pages) ) {
-			$return_metas = $site_pages[$qstring][$meta_type];
-		} else {
-			$page_path = getcwd() . '/' . yt_config('content_dir') . '/' . $qstring .'.php';
-			if ( file_exists( $page_path ) ) {
-				$return_metas = ucfirst(str_replace('-', ' ', $qstring));
-			} else {
-				$return_metas = '404 Error - Page not found';
-			}
-		}
-		// return page title tag and description
-		return $return_metas;
-	}
-}
-
-/**
  * Website navigation.
  */
 function nav_menu()
 {
     $nav_menu = '';
-    $nav_items = page_metas(false,'nav_menu');
+	
+    include yt_config('template_dir') .'/nav-menu.php';
     
     foreach ( $nav_items as $uri => $name )
 	{
-        $class = query_str() == $uri ? ' active' : '';
-        
+        $class = query_str() == $uri .'/' || query_str() == $uri ? ' active' : '';
+		
         $nav_menu .= "\t\t\t\t".'<a href="'. make_link($uri) .'" aria-label="'. $name .'" class="nav-item nav-link'. $class .'">'. $name .'</a>'."\n";
     }
 
@@ -155,7 +116,7 @@ function nav_menu()
 /**
  * Load page content.
  */
-function yt_load_pages()
+function YTLoadPages()
 {
 	$req_page = isset($_GET['page']) ? $_GET['page'] : 'home';
 	
@@ -185,7 +146,7 @@ function footer_info()
 /**
  * Load page header.
  */
-function yt_header()
+function YTLoadHeader()
 {
 	include_once YTTMPL .'/header.php';
 }
@@ -193,7 +154,7 @@ function yt_header()
 /**
  * Load page footer.
  */
-function yt_footer()
+function YTLoadFooter()
 {
 	include_once YTTMPL .'/footer.php';
 }
