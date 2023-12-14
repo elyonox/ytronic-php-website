@@ -1,25 +1,17 @@
 <?php
-/**
- * Ytronic template loader.
- */
-if ( ! defined( 'YTABPATH' ) ) {
+if ( ! defined( 'REQABSP' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-YTLoadPages();
+load_pages();
 
-YTLoadHeader();
+include_once TMPLDIR .'header.php';
 
-if ( function_exists( 'YTLoadPageContent' ) )
+if ( load_pages() === false )
 {
-	YTLoadPageContent();
+	echo '<h1 class="h2 my-5 text-center text-secondary">Invalid page type!</h1>';
 } else {
-	$noContent = '<div class="container-fluid py-5 my-5">';
-	$noContent .= '<h1 class="h2 text-danger text-center pt-lg-5 mt-lg-5">NO Content...</h1>';
-	$noContent .= '<div class="text-secondary text-center">Add a function with some content into this file.</div>';
-	$noContent .= '</div>';
-	
-	echo $noContent;
+	page_content();
 }
-	
-YTLoadFooter();
+
+include_once TMPLDIR .'footer.php';

@@ -3,7 +3,7 @@ if ( ! defined( 'REQABSP' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-function page_title(){ return 'Contact Page - Ytronic'; }
+function page_title(){ return 'About Page - Ytronic'; }
 
 function page_content() // Main Content
 {
@@ -15,8 +15,8 @@ function page_content() // Main Content
 <div class="container-fluid pb-5 mt-5 mt-lg-0 pt-5 pt-lg-0">
 	<div class="container py-5">
 		<div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
-			<h5 class="fw-bold text-primary text-uppercase">Contact Page</h5>
-			<h1 class="mb-0">Contact Page Example Content</h1>
+			<h5 class="fw-bold text-primary text-uppercase">About Page</h5>
+			<h1 class="mb-0">About Page Example Content</h1>
 		</div>
 		<div class="row g-5">
 			<div class="col-lg-4 col-md-6">

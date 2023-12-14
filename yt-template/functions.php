@@ -1,73 +1,39 @@
 <?php
-/**
- * Ytronic functions.
- */
-if ( ! defined( 'YTABPATH' ) ) {
+if ( ! defined( 'REQABSP' ) ) {
 	exit; // Exit if accessed directly.
 }
 
 /**
- * Server query string.
+ * Meta "robots" function.
  */
-function query_str()
+function indexing_to_search_engines( $index = 'index', $follow = 'follow')
 {
-	if ( $_SERVER['QUERY_STRING'] == '' )
-	{
-		$srv_query_str = '/';
-	} else {
-		$srv_query_str = str_replace("page=", '', $_SERVER['QUERY_STRING']);
-	}
-	return $srv_query_str;
-}
-
-/**
- * Site name.
- */
-function site_name()
-{
-	echo yt_config( 'site_name' );
-}
-
-/**
- * Site description.
- */
-function YTSiteDescript()
-{
-	echo yt_config( 'site_descript' );
-}
-
-/**
- * Indexing pages to search engines or not.
- */
-function YTIndexingSearchEngines( $index = 'index', $follow = 'follow')
-{
-	$meta_robots = "\n\t".'<meta name="robots" content="'.$index.', '.$follow.'">'."\n";
-	$block_robots = "\n\t".'<meta name="robots" content="noindex, nofollow">'."\n";
-	$allow_sengine = yt_config('allow_search_engine' ) ? $meta_robots : $block_robots;
+	$meta_robots = $index.', '.$follow;
+	$block_robots = 'noindex, nofollow';
+	
+	$allow_sengine = ALLOWSEARCHENGINE ? $meta_robots : $block_robots;
 	
 	return $allow_sengine;
 }
 
 /**
- * Create link when pretty_url is active.
+ * Define ASSETS URL.
  */
-function make_link( $link )
-{
-	$requestLink = yt_config('pretty_url') || $link == '/' ? $link : '?page=' . $link;
-	$realLink = $requestLink == '/' ? site_url() : site_url() . $requestLink;
-	
-	return yt_config('pretty_url') && $link !== '/' ? $realLink .'/' : $realLink;
+if ( ! defined( 'ASSETSURI' ) ) {
+	define ('ASSETSURI', site_url(). TMPLDIRNAME .'/assets/');
 }
 
 /**
- * Load header styles.
+ * Load styles.
  */
-function YTLoadStyles()
+function load_styles()
 {
 	$hscripts = array(
-		'<link rel="stylesheet" href="'. CSSURI .'/google-fonts.css">',
-		'<link rel="stylesheet" href="'. CSSURI .'/bootstrap.min.css">',
-		'<link rel="stylesheet" href="'. CSSURI .'/style.css">',
+		'<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Rubik:wght@400;500;600;700&display=swap">',
+		'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">',
+		'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">',
+		'<link rel="stylesheet" href="'. ASSETSURI .'css/bootstrap.min.css">',
+		'<link rel="stylesheet" href="'. ASSETSURI .'css/style.css">',
 	);
 	
 	foreach ( $hscripts as $hscript )
@@ -77,15 +43,14 @@ function YTLoadStyles()
 }
 
 /**
- * Load footer scripts.
+ * Load scripts.
  */
-function YTLoadScripts()
+function load_scripts()
 {
 	$fscripts = array(
-		'<!-- Bootstrap JS -->',
-		'<script src="'.JSURI.'/bootstrap.bundle.min.js"></script>',
-		'<!-- Main JS -->',
-		'<script src="'.JSURI.'/main.js"></script>',
+		'<script type="text/javascript" src="'. ASSETSURI .'js/jquery-3.6.3.min.js"></script>',
+		'<script type="text/javascript" src="'. ASSETSURI .'js/bootstrap.bundle.min.js"></script>',
+		'<script type="text/javascript" src="'. ASSETSURI .'js/main.js"></script>',
 	);
 	
 	foreach ( $fscripts as $fscript )
@@ -95,74 +60,25 @@ function YTLoadScripts()
 }
 
 /**
- * Website navigation.
+ * Website pages router.
  */
-function nav_menu()
+function load_pages()
 {
-    $nav_menu = '';
+	$query_page = str_starts_with($_SERVER['QUERY_STRING'],'page=') ? str_replace("page=", '', $_SERVER['QUERY_STRING']) : 'home';
 	
-    include yt_config('template_dir') .'/nav-menu.php';
-    
-    foreach ( $nav_items as $uri => $name )
+    $page_path = CONTENTDIR . rtrim($query_page,"/") . '.php';
+	
+	$page404 = CONTENTDIR . '404.php';
+
+    if ( file_exists( $page_path ) && ( strpos( $query_page, "index" ) === false ) )
 	{
-        $class = query_str() == $uri .'/' || query_str() == $uri ? ' active' : '';
-		
-        $nav_menu .= "\t\t\t\t".'<a href="'. make_link($uri) .'" aria-label="'. $name .'" class="nav-item nav-link'. $class .'">'. $name .'</a>'."\n";
-    }
-
-    echo ltrim($nav_menu);
-}
-
-/**
- * Load page content.
- */
-function YTLoadPages()
-{
-	$req_page = isset($_GET['page']) ? $_GET['page'] : 'home';
-	
-    $page_path = getcwd() . '/' . yt_config('content_dir') . '/' . rtrim($req_page,"/") . '.php';
-
-    if ( ! file_exists( $page_path ) )
-	{
-        $page_path = getcwd() . '/' . yt_config('content_dir') . '/404.php';
-    }
-
-    include_once $page_path;
-}
-
-/**
- * Ytronic app footer info.
- */
-function footer_info()
-{
-	$link1 = 'https://github.com/elyonox/ytronic-php-website';
-	$link2 = 'https://github.com/elyonox';
-	$info1 = '<a href="'.$link1.'" target="_blank">Ytronic '. yt_config('version') .'</a>';
-	$info2 = 'Designed by <a href="'.$link2.'" target="_blank">YONOX</a>';
-	
-	echo $info1.' - '.$info2;
-}
-
-/**
- * Load page header.
- */
-function YTLoadHeader()
-{
-	include_once YTTMPL .'/header.php';
-}
-
-/**
- * Load page footer.
- */
-function YTLoadFooter()
-{
-	include_once YTTMPL .'/footer.php';
-}
-
-/**
- * Load Ytronic template.
- */
-function load_template()
-{
-	require_once yt_config('template_dir') .'/template.php';
+		if( strpos( file_get_contents( $page_path ), "page_content()" ) )
+		{
+			include_once $page_path;
+		} else {
+			return false;
+		}
+    } else {
+		include_once $page404;
+	}
 }

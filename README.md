@@ -15,23 +15,21 @@
 ### Installation
 
 1. Download as Zip or Clone this project
-2. Move this project to Root Directory into `ytronic` folder
+2. Move this files of project to Root Directory into `htdocs` folder
 ```
-Local Disc C: -> xampp -> htdocs -> 'ytronic'
+Local Disc C: -> xampp -> htdocs
 ```
 *Local Disk C is the location where xampp was installed*
 
-3. The `yt-config.php` file contains the configuration of the website
+3. Open XAMPP Control Panel and Start 'Apache'
 
-4. Open XAMPP Control Panel and Start 'Apache'
-
-5. On your browser type the address `http://localhost/ytronic/`
+4. On your browser type the address `http://localhost/`
 
 ### Howto create Pages and Menus
 
-- Go to `ytronic -> yt-content`, clone `faqs.php`, rename to `webpage.php` and edit the title, content, metas, etc... 
+- Go to `yt-content`, clone `home.php`, rename to `webpage.php` and edit the title, content, metas, etc... 
 
-- Open `ytronic -> yt-template -> nav-menu.php` and go to `line 11` and add this:
+- Open `yt-template -> menu-nav.php` and go to `line 12` and add this:
 
 ```php
 'webpage'	=> 'Webpage',
@@ -42,4 +40,4 @@ Local Disc C: -> xampp -> htdocs -> 'ytronic'
 License
 -------
 
-Licensed under GNU General Public License v2 or later
+Licensed under GNU General Public License v3
