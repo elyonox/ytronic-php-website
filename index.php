@@ -12,7 +12,7 @@
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
 
-require( 'yt-config.php' );
+require('yt-config.php');
 
 /**
  * Load required files.
