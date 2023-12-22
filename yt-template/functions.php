@@ -60,17 +60,22 @@ function load_scripts()
 }
 
 /**
- * Website pages router.
+ * Router Query Pages and load the Content for each.
  */
 function load_pages()
 {
-	$query_page = str_starts_with($_SERVER['QUERY_STRING'],'page=') ? str_replace("page=", '', $_SERVER['QUERY_STRING']) : 'home';
+	if ( isset($_GET['page']) && !empty($_GET['page']) )
+	{
+		$query_page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
+		$query_page = $query_page == 'index' ? 'home' : $query_page;
+	} else {
+		$query_page = 'home';
+	}
 	
-    $page_path = CONTENTDIR . rtrim($query_page,"/") . '.php';
-	
+	$page_path = CONTENTDIR . rtrim($query_page,"/") . '.php';
 	$page404 = CONTENTDIR . '404.php';
 
-    if ( file_exists( $page_path ) && ( strpos( $query_page, "index" ) === false ) )
+    if ( file_exists( $page_path ) )
 	{
 		if( strpos( file_get_contents( $page_path ), "page_content()" ) )
 		{
