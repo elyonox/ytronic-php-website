@@ -10,7 +10,7 @@ function page_content()
 	ob_start(); // Start content buffer.
 ?>
 
-<div class="container py-5 bg-light">
+<div class="container py-5 my-5 bg-light">
 	<h1 class="text-center text-danger">404 ERROR. Page not found</h1>
 </div>
 
