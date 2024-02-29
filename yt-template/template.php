@@ -3,8 +3,6 @@ if ( ! defined( 'REQABSP' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-load_pages();
-
 include_once TMPLDIR .'header.php';
 
 if ( load_pages() === false )
